@@ -7,6 +7,7 @@ This project is a simple, modern Lotto Number Generator built with vanilla HTML,
 - **Lotto Generation:** Uses `Math.random` to generate unique numbers (1-45).
 - **Modern UI:** Styled with CSS Variables for theme consistency.
 - **Theme Switching:** Supports light and dark modes with persistent user preferences.
+- **Analytics:** Integrated Google Analytics (gtag.js) for visitor tracking.
 - **Responsive Layout:** Works on various screen sizes.
 
 ## Current Implementation Plan
