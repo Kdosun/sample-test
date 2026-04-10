@@ -1,28 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJ0X83RMVX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-JJ0X83RMVX');
-  </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Memorizer</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="main.js"></script>
 </head>
 <body>
-  <button id="theme-toggle" aria-label="Toggle dark mode">🌙 Dark Mode</button>
-  <h1>Hello, world!</h1>
-  <div id="lotto-container">
-    <h2>Lotto Number Generator</h2>
-    <button id="generate-lotto-numbers">Generate Numbers</button>
-    <div id="lotto-numbers"></div>
-  </div>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <header>
+        <h1>English Word Memorizer</h1>
+    </header>
+    <main>
+        <div class="container">
+            <word-memorizer></word-memorizer>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Word Memorizer App</p>
+    </footer>
 </body>
 </html>

@@ -1,108 +1,64 @@
 :root {
-  --bg-color: oklch(98% 0.01 240);
-  --text-color: oklch(20% 0.02 240);
-  --card-bg: oklch(100% 0 0);
-  --btn-bg: oklch(92% 0.02 240);
-  --btn-hover-bg: oklch(88% 0.02 240);
-  --btn-text: oklch(20% 0.02 240);
-  --lotto-ball: oklch(65% 0.15 150);
-  --lotto-text: #fff;
-}
-
-[data-theme="dark"] {
-  --bg-color: oklch(15% 0.02 240);
-  --text-color: oklch(95% 0.01 240);
-  --card-bg: oklch(20% 0.03 240);
-  --btn-bg: oklch(30% 0.04 240);
-  --btn-hover-bg: oklch(35% 0.05 240);
-  --btn-text: oklch(95% 0.01 240);
-  --lotto-ball: oklch(75% 0.18 150);
-  --lotto-text: #000;
+  --bg-color: oklch(0.97 0.01 200);
+  --text-color: oklch(0.2 0.02 200);
+  --primary-color: oklch(0.6 0.15 250);
+  --secondary-color: oklch(0.7 0.1 200);
+  --accent-color: oklch(0.6 0.2 150);
+  --card-bg: oklch(1 0 0);
+  --card-shadow: 0 10px 30px oklch(0 0 0 / 0.1);
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 body {
+  margin: 0;
+  font-family: var(--font-family);
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-family: system-ui, -apple-system, sans-serif;
-  transition: background-color 0.4s ease, color 0.4s ease;
-  margin: 0;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
+  background-image: radial-gradient(oklch(0.9 0.01 200) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
-#theme-toggle {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  border: 1px solid var(--text-color);
-  background: var(--card-bg);
-  color: var(--text-color);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-#lotto-container {
+header {
+  padding: 2rem 1rem;
   text-align: center;
-  margin-top: 100px;
-  background-color: var(--card-bg);
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  transition: background-color 0.4s ease;
 }
 
-#generate-lotto-numbers {
-  padding: 12px 24px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 12px;
-  border: none;
-  background-color: var(--btn-bg);
-  color: var(--btn-text);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+header h1 {
+  margin: 0;
+  font-weight: 800;
+  font-size: 2.5rem;
+  background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-#generate-lotto-numbers:hover {
-  background-color: var(--btn-hover-bg);
-  transform: scale(1.02);
-}
-
-#lotto-numbers {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 30px;
-}
-
-.lotto-number {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background-color: var(--lotto-ball);
-  color: var(--lotto-text);
+main {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2rem;
-  font-weight: bold;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 1rem;
 }
 
-@keyframes pop-in {
-  from { transform: scale(0); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+.container {
+  width: 100%;
+  max-width: 600px;
+  container-type: inline-size;
+}
+
+footer {
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* Custom Element Styling will be in Shadow DOM mostly, 
+   but we can define some shared styles or defaults here if needed */
+word-memorizer {
+  display: block;
+  width: 100%;
 }
