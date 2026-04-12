@@ -2,15 +2,16 @@ class WordMemorizer extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.words = [];
+    this.words = JSON.parse(localStorage.getItem('word-memorizer-words')) || [];
     this.cycleQueue = [];
     this.currentWord = '';
-    this.totalWordsCount = 0;
+    this.totalWordsCount = this.words.length;
     this.shownCount = 0;
   }
 
   connectedCallback() {
     this.render();
+    this.updateStatus();
   }
 
   shuffle(array) {
@@ -27,6 +28,7 @@ class WordMemorizer extends HTMLElement {
     const word = input.value.trim();
     if (word) {
       this.words.push(word);
+      localStorage.setItem('word-memorizer-words', JSON.stringify(this.words));
       this.totalWordsCount = this.words.length;
       input.value = '';
       this.updateStatus();
@@ -50,6 +52,19 @@ class WordMemorizer extends HTMLElement {
     this.updateStatus();
   }
 
+  resetWords() {
+    if (confirm('Are you sure you want to delete all words? This action cannot be undone.')) {
+        this.words = [];
+        this.cycleQueue = [];
+        this.currentWord = '';
+        this.totalWordsCount = 0;
+        this.shownCount = 0;
+        localStorage.removeItem('word-memorizer-words');
+        this.render();
+        this.updateStatus();
+    }
+  }
+
   updateStatus() {
     const status = this.shadowRoot.querySelector('.status');
     const cycleStatus = this.shadowRoot.querySelector('.cycle-status');
@@ -58,6 +73,8 @@ class WordMemorizer extends HTMLElement {
     
     if (this.shownCount > 0) {
         cycleStatus.textContent = `Cycle: ${this.shownCount} / ${this.totalWordsCount}`;
+    } else if (this.totalWordsCount > 0) {
+        cycleStatus.textContent = 'Click Next to start';
     } else {
         cycleStatus.textContent = 'Add words and click Next to start';
     }
@@ -164,6 +181,19 @@ class WordMemorizer extends HTMLElement {
           transform: scale(0.98);
         }
 
+        .btn-reset {
+            background-color: transparent;
+            color: oklch(0.6 0.15 250);
+            border: 2px solid oklch(0.9 0.01 200);
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .btn-reset:hover {
+            background-color: oklch(0.95 0.01 200);
+            border-color: oklch(0.8 0.05 250);
+        }
+
         .status-container {
             display: flex;
             justify-content: space-between;
@@ -202,6 +232,7 @@ class WordMemorizer extends HTMLElement {
         </div>
 
         <button class="btn-next">Next Word</button>
+        <button class="btn-reset">Reset All Words</button>
 
         <div class="status-container">
             <span class="status">Total words: 0</span>
@@ -215,6 +246,7 @@ class WordMemorizer extends HTMLElement {
       if (e.key === 'Enter') this.addWord();
     });
     this.shadowRoot.querySelector('.btn-next').addEventListener('click', () => this.showNextWord());
+    this.shadowRoot.querySelector('.btn-reset').addEventListener('click', () => this.resetWords());
   }
 }
 
